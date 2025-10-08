@@ -1,18 +1,26 @@
 .missaocontainer1{
-    width: 90%;
+    width: 100%;
     max-width: 600px;
     margin-top: 10px;
-
+}
+.missoes{
+    
 }
 .missao1{
     background-color: #E6E6E6;
     border-radius: 10px;
     padding: 10px;
-    margin:20px;
     display: flex;
     justify-content: space-between;
     align-items: center;
+    margin-bottom: 20px;
 }
 .missao1 p{
     margin: 0;
+}
+.missao2{
+    background-color: rgb(195, 252, 233);
+}
+.bi{
+    margin: 5px;
 }

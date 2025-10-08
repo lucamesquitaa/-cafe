@@ -1,3 +1,10 @@
+.header1{
+    position: fixed;
+    top: 0;
+    width: 100%;
+    max-width: 600px;
+    z-index: 9999;
+}
 .cafeteriaContainer{
     width: 100%;
     max-width: 600px;
@@ -6,6 +13,7 @@
     flex-direction: column;
     align-items: center;
     justify-content: center;
+    padding: 0;
 }
 .carr1{
     width: 100%;
@@ -15,11 +23,36 @@
     align-self: center;
     max-width: 600px;
 }
-.carr1 img{
+.backg1{
+    position: fixed;
+    top: 45px;
     width: 100%;
-    height: auto;
-    border-radius: 5px;
+    max-width: 600px;
+    overflow: hidden;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+.pontos{
+    position: absolute;
+    height: 50px;
+    top: 10px;
+    left: 10px;
+    background-color: rgba(255, 255, 255, 0.8);
+    color: #424242;
+    padding: 5px;
+    border-radius:  0px 0px 20px 20px;
+}
+.backg1 img{
+    width: 100%;
+    height: 400px;
     max-height: 250px;
+}
+.love1{
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    color: rgba(255, 255, 255, 0.8);
+    font-size: 1.8rem;
+    cursor: pointer;
 }
 .titles{
     display: flex;
@@ -43,14 +76,12 @@
     gap: 10px;
     
 }
-.botoes button{
-    background-color: #6f4e37;
-    color: white;
-    border: none;
-    padding: 30px;
-    border-radius: 5px;
+.botoes1 {
+    color: #553925;
     cursor: pointer;
-    font-size: 1.3rem;
+}
+.botoes1.active {
+    background-color: #e5e1d4;
 }
 .tab1{
     display: flex;
@@ -59,15 +90,29 @@
     justify-content: center;
     width: 100%;
     max-width: 600px;
-    padding: 10px;
+    padding: 5px 0px;
     border-radius: 5px;
-    margin-top: 10px;
     max-height: 250px;
 }
 .rout1{
         width: 90%;
         max-width: 600px;
+        overflow-x: auto;
     }
+.page1{
+    width: 100%;
+    max-width: 600px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    margin-top: 280px;
+    padding-bottom: 20px;
+    z-index: 99;
+    background-color: white;
+    border-radius: 10px;
+    max-height: 600px;
+}
 
 @media screen and (max-width: 700px) {
     

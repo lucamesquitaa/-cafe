@@ -1,21 +1,17 @@
 .inicioContainer{
     margin-top: 10px;
-}
-.divider1{
-    width: 90%;
-    max-width: 600px;
     display: flex;
     align-items: center;
-    justify-content: space-between;
-    flex-direction: row;
-    margin-bottom: 30px;
+    justify-content: center;
+    flex-direction: column;
 }
-.divider1 p{
-    padding: 0 10px;
-    width: 50%;
+.ban1{
+    width: 100%;
+    max-width: 600px;
+    border-radius: 15px;
+    margin: 10px 0;
 }
-@media screen and (max-width: 700px) {
-    .divider1{
+ .divider1{
         display: flex;
         align-items: center;
         justify-content: center;
@@ -23,7 +19,9 @@
         margin-bottom: 30px;
     }
     .divider1 p{
-        padding: 0 10px;
-        width: 90%;
+        padding:0;
+        width: 100%;
     }
+@media screen and (max-width: 700px) {
+   
 }

@@ -1,8 +1,7 @@
 import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms'
-import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { NgbModule, NgbTypeaheadModule } from '@ng-bootstrap/ng-bootstrap';
+import { NgbDropdownConfig, NgbDropdownModule, NgbModule, NgbTypeaheadModule } from '@ng-bootstrap/ng-bootstrap';
 import { HeaderComponent } from './components/header/header.component';
 import { ItemComponent } from './components/item/item.component';
 
@@ -13,18 +12,23 @@ import { ItemComponent } from './components/item/item.component';
             HeaderComponent
       ],
   imports: [
-        FormsModule,
-        CommonModule,
-        ReactiveFormsModule,
-        NgbModule,
-        NgbTypeaheadModule,],
+    FormsModule,
+    CommonModule,
+    ReactiveFormsModule,
+    NgbModule,
+    NgbTypeaheadModule,
+    NgbDropdownModule,
+],
   exports: [
         FormsModule,
         ReactiveFormsModule,
         NgbModule,
         NgbTypeaheadModule,
+        NgbDropdownModule,
       ItemComponent,
       HeaderComponent
 ],
+providers: [NgbDropdownConfig
+]
 })
 export class SharedModule { }
