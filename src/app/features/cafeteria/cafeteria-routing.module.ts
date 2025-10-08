@@ -12,6 +12,11 @@ const routes: Routes = [
     component: CafeteriaComponent,
     children: [
       {
+        path: '',
+        redirectTo: 'inicio',
+        pathMatch: 'full'
+      },
+      {
         path: 'inicio',
         component: InicioComponent
       },

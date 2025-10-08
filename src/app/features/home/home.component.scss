@@ -8,7 +8,6 @@
 }
 .content{
   display: flex;
-  margin-top: -60px;
   flex-direction: column;
   align-items: center;
   justify-content: center;
@@ -18,4 +17,8 @@
   width: 200px;
   background-color: #e5e1d4;
   color:black;
+}
+.contentImg{
+  width: 100%;
+  height: 140px;
 }
