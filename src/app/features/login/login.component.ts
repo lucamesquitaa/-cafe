@@ -26,6 +26,10 @@ export class LoginComponent extends ComponentBase implements AfterViewInit {
     super(injector);
   }
 
+  override ngOnInit(): void {
+    this.context.pageTitle = "Login";
+  }
+
   ngAfterViewInit(): void {
   }
 

@@ -8,4 +8,5 @@ export interface ContextModel {
     usuarioAutenticado: boolean,
     usuario: ResultLoginModel,
     token: string,
+    pageTitle: string
 }

@@ -6,6 +6,8 @@
     display: flex;
     flex-direction: column;
     align-items: center;
+    justify-content: center;
+    width: 100%;
     padding: 10px;
     max-width: 600px;
 }
@@ -13,4 +15,38 @@
     width: 100%;
     max-width: 600px;
     margin-bottom: 10px;
+}
+.content{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+.content > button{
+  padding: 30px;
+  width: auto;
+  max-width: 250px;
+  background-color: #e5e1d4;
+  color:black;
+}
+.contentImg img{
+  margin-top: -20px;
+  width: 100%;
+  height: 200px;
+  object-fit: cover;
+  object-position: center;
+  clip-path: inset(20px 0px 20px 0px);
+}
+.search1{
+  width: 90%;
+  margin: 0px auto;
+}
+.search1 button{
+  font-size: 1.2rem;
+  width: 50px;
+  color: black;
+}
+.inp1{
+    border: 1px solid black;
+    height: 50px;
 }

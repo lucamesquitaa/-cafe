@@ -6,6 +6,27 @@
 }
 .telas{
   width: 100%;
-    height: 100vh;
+  padding-top: 55px;
+  padding-bottom: 90px;
+  min-height: calc(100vh - 145px);
+  box-sizing: border-box;
 }
-
+.header1{
+  position: fixed;
+  top: 0;
+  width: 100%;
+  max-width: 600px;
+  z-index: 9999;
+  margin-top: -1px;
+}
+.footer1{
+  position: fixed;
+  bottom: 0;
+  width:100%;
+  max-width: 600px;
+  z-index: 9999;
+  height: 70px;
+  background-color: rgb(255, 255, 255);
+  left: 50%;
+  transform: translateX(-50%);
+}

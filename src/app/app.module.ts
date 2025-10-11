@@ -9,6 +9,7 @@ import { ROUTES } from './app.routes'
 import { CommonModule } from '@angular/common';
 import { CookieService } from 'ngx-cookie-service';
 import { ToastrModule } from 'ngx-toastr';
+import { SharedModule } from "./shared/shared.module";
 
 
 @NgModule({
@@ -22,8 +23,9 @@ import { ToastrModule } from 'ngx-toastr';
     NgbDropdownModule,
     BrowserModule,
     BrowserAnimationsModule,
-    ToastrModule.forRoot()
-  ],
+    ToastrModule.forRoot(),
+    SharedModule
+],
   providers: [
     NgbDropdown,
     CookieService

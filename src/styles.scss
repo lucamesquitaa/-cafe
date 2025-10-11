@@ -1,5 +1,12 @@
 @import "../node_modules/bootstrap/scss/bootstrap";
 
+/* Variáveis CSS globais */
+:root {
+  --cor-azul-principal: #8ba1ff; /* Azul Material Design */
+  --cor-azul-escuro: #5170ff;    /* Azul mais escuro para hover/pressed */
+  --cor-azul-claro: #c7d1ff;     /* Azul claro para backgrounds */
+}
+
 html,
 body {
   height: 100vh;

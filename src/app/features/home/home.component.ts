@@ -23,6 +23,7 @@ export class HomeComponent extends ComponentBase {
 
   }
   override ngOnInit(): void {
+    this.context.pageTitle = "Clube Cafeína";
   }
 	buscar(){
 		this.router.navigate(['catalogo']);

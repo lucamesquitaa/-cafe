@@ -4,12 +4,14 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms'
 import { NgbDropdownConfig, NgbDropdownModule, NgbModule, NgbTypeaheadModule } from '@ng-bootstrap/ng-bootstrap';
 import { HeaderComponent } from './components/header/header.component';
 import { ItemComponent } from './components/item/item.component';
+import { FooterComponent } from './components/footer/footer.component';
 
 
 @NgModule({
       declarations: [
             ItemComponent,
-            HeaderComponent
+            HeaderComponent,
+            FooterComponent
       ],
   imports: [
     FormsModule,
@@ -26,7 +28,8 @@ import { ItemComponent } from './components/item/item.component';
         NgbTypeaheadModule,
         NgbDropdownModule,
       ItemComponent,
-      HeaderComponent
+      HeaderComponent,
+      FooterComponent
 ],
 providers: [NgbDropdownConfig
 ]
