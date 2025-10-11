@@ -18,6 +18,7 @@ export class ContextService {
       number: 0,
       products: []
     },
+    pageTitle: "Clube Cafeína"
   };
 
   static getContext(): ContextModel{

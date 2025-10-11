@@ -1,22 +1,37 @@
-.bi::before {
-  color: black;
-  font-size: 1.8rem;
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
 }
 .cafeteria{
     display: flex;
     flex-direction: row;
     align-items: center;
-    padding: 20px;  
+    padding: 5px;  
     justify-content: space-between;
     border: 1px solid #ccc;
     border-radius: 8px;
     width: 100%;
-    margin-top: 5px;
+    margin-bottom: 10px;
+    box-shadow: 0 2px 2px rgba(114, 114, 114, 0.5);
+}
+.cafeteriaInfo{
+  width: 200px;
+  padding: 0px 10px;
 }
 .cafeteriaImg img{
-    width: 200px;
-    height: auto;
+    width: 150px;
     border-radius: 5px;
-    margin-right: 20px;
-    max-height: 100px;
+    height: 120px;
+}
+.cora1{
+  display: flex;
+  align-items: center;
+  cursor: pointer;
+  justify-content: space-between;
+}
+.bi::before
+{
+  color: #424242;
+  font-size: 1.2rem;
 }

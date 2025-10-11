@@ -1,14 +1,49 @@
-<div class="containerHome">
-
-  <app-header></app-header>
-
-  <div class="contentImg">
-    <img src="assets/bannercafe.png" alt="Café" class="img-fluid">
-  </div>
-  <div class="content">
-    
-    <h4>Conheça os melhores cafés da sua região</h4>
-    <p>Com sistema de fidelidade e recompensas exclusivas.</p>
-
-    <button class="btn btn-primary bi bi-cup-hot" (click)="buscar()"> BUSCAR</button>
+<div class="containerHome"> 
+    <div id="carouselExampleDark" class="carousel carousel-dark slide" data-bs-ride="carousel">
+        <div class="carousel-indicators">
+            <button type="button" data-bs-target="#carouselExampleDark" data-bs-slide-to="0" class="active " aria-current="true" aria-label="Slide 1"></button>
+            <button type="button" data-bs-target="#carouselExampleDark" data-bs-slide-to="1" class="" aria-label="Slide 2"></button>
+            <button type="button" data-bs-target="#carouselExampleDark" data-bs-slide-to="2" class="" aria-label="Slide 3"></button>
+        </div>
+        <div class="carousel-inner">
+            <div class="carousel-item active" data-bs-interval="5000">
+                <img src="assets/chHD.jpg" class="c1111" alt="...">
+                <div class="carousel-caption">
+                    <h4>Novidade na área!</h4>
+                    <p>Visite a cafeteria Cheirim Bão.</p>
+                </div>
+            </div>
+            <div class="carousel-item" data-bs-interval="5000">
+                <img src="assets/coffs.png" class="c1111" alt="...">
+                <div class="carousel-caption">
+                    <h4>Coffs Lourdes,</h4>
+                    <p>Em frente ao Bernoulli!</p>
+                </div>
+            </div>
+            <div class="carousel-item" data-bs-interval="5000">
+                <img src="assets/star1.png" class="c1111" alt="...">
+                <div class="carousel-caption">
+                    <h4>Exemplo de Slide</h4>
+                    <p>Exemplo de descrição do slide.</p>
+                </div>
+            </div>
+        </div>
+        <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleDark" data-bs-slide="prev">
+            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+            <span class="visually-hidden ">Previous</span>
+        </button>
+        <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleDark" data-bs-slide="next">
+            <span class="carousel-control-next-icon" aria-hidden="true"></span>
+            <span class="visually-hidden ">Next</span>
+        </button>
+        </div>
+    <div class="containerRedirect">
+        <h3> Seja Bem-vindo </h3>
+        <h3> ao nosso Clube! </h3>
+    </div>
+    <div class="containerbtn4">
+        <button class="btn btn-primary btn1">Catalogo de Cafés <i class="bi bi-cup-hot-fill"></i></button>
+        <button class="btn btn-primary">Rede Social <i class="bi bi-people-fill" ></i></button>
+        <button class="btn btn-primary">Meus Pontos <i class="bi bi-currency-dollar"></i></button>
+    </div>
 </div>

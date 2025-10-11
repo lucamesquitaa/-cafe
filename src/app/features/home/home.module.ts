@@ -4,6 +4,7 @@ import { HomeComponent } from './home.component';
 import { SharedModule } from 'src/app/shared/shared.module';
 import { NgbTypeaheadConfig } from '@ng-bootstrap/ng-bootstrap';
 import { HomeRoutingModule } from './home-routing.module';
+import { CatalogoModule } from '../catalogo/catalogo.module';
 
 
 
@@ -12,6 +13,7 @@ import { HomeRoutingModule } from './home-routing.module';
   imports: [
     CommonModule,
     HomeRoutingModule,
+    CatalogoModule,
     SharedModule
   ],
   providers: [NgbTypeaheadConfig],

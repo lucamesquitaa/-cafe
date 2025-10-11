@@ -3,7 +3,11 @@
     <img [src]="cafeteria.image" alt="{{cafeteria.name}}" />
   </div>
   <div class="cafeteriaInfo">
-    <h2>{{cafeteria.name}}</h2>
+    <div class="cora1">
+      <p style="font-weight: bold; font-size: 1.05rem;">{{cafeteria.name}}</p>
+      <i *ngIf="true" class="bi bi-heart" style="font-size: 1.2rem;"></i>
+      <i *ngIf="false" class="bi bi-heart-fill" style="font-size: 1.2rem;"></i>
+    </div>
     <p>{{cafeteria.description}}</p>
   </div>
 </div>

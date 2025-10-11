@@ -1,9 +1,6 @@
-.header1{
-    position: fixed;
-    top: 0;
-    width: 100%;
-    max-width: 600px;
-    z-index: 9999;
+*, body {
+  margin: 0;
+  padding: 0;
 }
 .cafeteriaContainer{
     width: 100%;
@@ -36,8 +33,8 @@
     height: 50px;
     top: 10px;
     left: 10px;
-    background-color: rgba(255, 255, 255, 0.8);
-    color: #424242;
+    background-color: rgba(255, 255, 255, 0.9);
+    color: var(--cor-azul-escuro);
     padding: 5px;
     border-radius:  0px 0px 20px 20px;
 }
@@ -50,7 +47,7 @@
     position: absolute;
     top: 10px;
     right: 10px;
-    color: rgba(255, 255, 255, 0.8);
+    color: rgba(255, 255, 255, 0.9);
     font-size: 1.8rem;
     cursor: pointer;
 }
@@ -77,11 +74,12 @@
     
 }
 .botoes1 {
-    color: #553925;
+    color: var(--cor-azul-escuro);
     cursor: pointer;
+    padding: 10px;
 }
 .botoes1.active {
-    background-color: #e5e1d4;
+    background-color: var(--cor-azul-claro);
 }
 .tab1{
     display: flex;
@@ -106,13 +104,14 @@
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    margin-top: 280px;
+    margin-top: 220px;
     padding-bottom: 20px;
     z-index: 99;
     background-color: white;
     border-radius: 10px;
-    max-height: 600px;
+    max-height: 500px;
 }
+
 
 @media screen and (max-width: 700px) {
     
