@@ -1,19 +1,62 @@
 <div class="containerCatalogo">
-  <div class="contentImg">
-    <img src="assets/bluecof.png" alt="Café" class="img-fluid">
-  </div>
-  <div class="input-group mb-3 search1">
-    <input type="text" class="form-control inp1" placeholder="Nome da cafeteria" >
-      
-    <button class="btn btn-outline-secondary" type="button"><i class="bi bi-funnel"></i></button>
-    <button class="btn btn-outline-secondary" type="button" ><i class="bi bi-search"></i></button>
-  </div>
-  <div class="cafeteria">
-    <div *ngFor="let cafeteria of cafeterias" >
-      <app-item class="item" [cafeteria]="cafeteria" (click)="onCafeteriaClick(cafeteria)"></app-item>
+
+  <!-- Seção de Busca Melhorada -->
+  <div class="search-section">
+    <div class="search-container">
+      <div class="search-title">
+        <h3>Busque a melhor Cafeteria</h3>
+        <p>Use os filtros para personalizar sua busca</p>
+      </div>
+      <div class="search-wrapper">
+        <div class="search-input-group">
+          <i class="bi bi-search search-icon"></i>
+          <input type="text" class="search-input" placeholder="Digite o nome..." #searchInput>
+          <button class="clear-btn" type="button" *ngIf="searchInput.value" (click)="searchInput.value = ''">
+            <i class="bi bi-x"></i>
+          </button>
+        </div>
+        <div class="filter-buttons">
+          <button class="filter-btn active" type="button">
+            <i class="bi bi-grid"></i>
+            <span>Todos</span>
+          </button>
+          <button class="filter-btn" type="button">
+            <i class="bi bi-heart"></i>
+            <span>Favoritos</span>
+          </button>
+          <button class="filter-btn" type="button">
+            <i class="bi bi-geo-alt"></i>
+            <span>Próximos</span>
+          </button>
+        </div>
+      </div>
     </div>
-    <div *ngFor="let cafeteria of cafeterias" >
-      <app-item class="item" [cafeteria]="cafeteria" (click)="onCafeteriaClick(cafeteria)"></app-item>
+  </div>
+
+  <!-- Grid de Cafeterias -->
+  <div class="cafeterias-section">
+    
+    <div class="cafeterias-grid">
+      <div class="cafeteria-card" *ngFor="let cafeteria of cafeterias" 
+           (click)="onCafeteriaClick(cafeteria)">
+        <app-item [cafeteria]="cafeteria"></app-item>
+      </div>
+    </div>
+
+    <!-- Loading State -->
+    <div class="loading-state" *ngIf="false">
+      <div class="loading-spinner"></div>
+      <p>Carregando cafeterias...</p>
+    </div>
+
+    <!-- Empty State -->
+    <div class="empty-state" *ngIf="cafeterias?.length === 0">
+      <div class="empty-icon">
+        <i class="bi bi-cup-hot"></i>
+      </div>
+      <h3>Nenhum local encontrado</h3>
+      <p>Tente ajustar os filtros ou buscar por outro termo</p>
+      <button class="btn-reset" type="button">Limpar Filtros</button>
     </div>
   </div>
 </div>

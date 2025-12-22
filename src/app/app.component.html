@@ -1,8 +1,11 @@
-<app-header class="header1" [title]="context.pageTitle"></app-header>
+<div class="app-container">
+  <app-header *ngIf="showHeaderFooter" class="header1" [title]="context.pageTitle"></app-header>
 
-<div class="telas">
-    
-    <router-outlet></router-outlet>
+  <main class="telas">
+    <div class="page-container">
+      <router-outlet></router-outlet>
+    </div>
+  </main>
 
+  <app-footer *ngIf="showHeaderFooter" class="footer1"></app-footer>
 </div>
-<app-footer class="footer1"></app-footer>

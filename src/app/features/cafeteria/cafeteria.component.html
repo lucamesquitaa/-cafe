@@ -1,33 +1,76 @@
-<div class="cafeteriaContainer" *ngIf="itemSelected">
-  
-  <!-- Imagem de fundo -->
-  <div class="backg1">
-    <img src="assets/chHD.jpg" alt="Café Background">
-    <div class="pontos">
-      <p class="pontos1">Pontos: $10</p>
+<div class="modern-cafeteria" *ngIf="itemSelected">
+  <!-- Hero Section with Parallax Effect -->
+  <section class="hero-section">
+    <div class="hero-image-container">
+      <img [src]="itemSelected?.image || 'assets/chHD.jpg'" [alt]="itemSelected?.name" class="hero-image">
+      <div class="hero-overlay"></div>
+      <div class="image-gradient"></div>
     </div>
-  </div>
-  
-  <!-- Conteúdo que pode subir e cobrir a imagem -->
-  <div class="page1">
-    <ul class="nav nav-tabs tab1">
-      <li class="nav-item">
-        <a class="nav-link botoes1" routerLink="inicio" routerLinkActive="active">Café</a>
-      </li>
-      <li class="nav-item">
-        <a class="nav-link botoes1" routerLink="cardapio" routerLinkActive="active">Cardápio</a>
-      </li>
-      <li class="nav-item">
-        <a class="nav-link botoes1" routerLink="missoes" routerLinkActive="active">Missões</a>
-      </li>
-      <li class="nav-item">
-        <a class="nav-link botoes1" routerLink="beneficios" routerLinkActive="active">Resgate</a>
-      </li>
-    </ul>
-
-    <div class="rout1">
-      <router-outlet></router-outlet>
+    
+    <!-- Floating Elements -->
+    <div class="hero-content">
+      <!-- Back Button -->
+      <button class="back-btn" (click)="goBack()">
+        <i class="bi bi-arrow-left"></i>
+      </button>
+      
+      <!-- Favorite Button -->
+      <button class="favorite-btn" (click)="toggleFavorite()" [class.active]="isLoved">
+        <i class="bi bi-heart-fill" *ngIf="isLoved"></i>
+        <i class="bi bi-heart" *ngIf="!isLoved"></i>
+      </button>
+      
+      <!-- Points Display -->
+      <div class="points-card">
+        <div class="points-icon">
+          <i class="bi bi-currency-dollar"></i>
+        </div>
+        <div class="points-info">
+          <span class="points-label">Seus Pontos</span>
+          <span class="points-value">1.250</span>
+        </div>
+      </div>
     </div>
-  </div>
+  </section>
 
+  <!-- Navigation Tabs -->
+  <section class="navigation-section">
+    <div class="nav-container">
+      <nav class="modern-tabs">
+        <button class="tab-btn" routerLink="inicio" routerLinkActive="active">
+          <i class="bi bi-house"></i>
+          <span>Visão Geral</span>
+        </button>
+        <button class="tab-btn" routerLink="cardapio" routerLinkActive="active">
+          <i class="bi bi-journal-text"></i>
+          <span>Cardápio</span>
+        </button>
+        <button class="tab-btn" routerLink="missoes" routerLinkActive="active">
+          <i class="bi bi-trophy"></i>
+          <span>Missões</span>
+        </button>
+        <button class="tab-btn" routerLink="beneficios" routerLinkActive="active">
+          <i class="bi bi-gift"></i>
+          <span>Resgates</span>
+        </button>
+      </nav>
+    </div>
+  </section>
+
+  <!-- Content Area -->
+  <section class="content-section">
+    <div class="content-container">
+      <!-- Breadcrumb -->
+      <div class="breadcrumb">
+        <span class="breadcrumb-item">Cafeterias</span>
+        <i class="bi bi-chevron-right"></i>
+        <span class="breadcrumb-item active">{{itemSelected?.name}}</span>
+      </div>
+      
+      <!-- Router Outlet with Animation -->
+      <div class="router-content">
+        <router-outlet></router-outlet>
+      </div>
+    </div>
+  </section>
 </div>

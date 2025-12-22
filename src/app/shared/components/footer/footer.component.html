@@ -1,6 +1,120 @@
-<div class="footer">
-    <i class="bi bi-house-door-fill"  style="font-size: 1.2rem; color: white;" (click)="navigateTo('home')"></i>
-    <i class="bi bi-cup-hot-fill"  style="font-size: 1.2rem; color: white;" (click)="navigateTo('catalogo')"></i>
-    <i class="bi bi-people-fill"  style="font-size: 1.2rem; color: white;" (click)="navigateTo('catalogo')"></i>
-    <i class="bi bi-currency-dollar"  style="font-size: 1.2rem; color: white;" (click)="navigateTo('catalogo')"></i>
-</div>
+<footer class="modern-footer">
+  <!-- Desktop Footer -->
+  <div class="desktop-footer">
+    <div class="footer-container">
+      <!-- Company Info -->
+      <div class="footer-section company-info">
+        <div class="footer-logo">
+          <img src="assets/gra-logo.png" alt="Logo" class="logo-img" width="200px">
+          <h3>Clube Cafeína</h3>
+        </div>
+        <p class="company-description">
+          Conectando você aos melhores cafés da cidade. Descubra novos sabores, 
+          acumule pontos e desfrute de experiências únicas.
+        </p>
+        <div class="social-links">
+          <a href="#" class="social-link">
+            <i class="bi bi-instagram"></i>
+          </a>
+          <a href="#" class="social-link">
+            <i class="bi bi-facebook"></i>
+          </a>
+          <a href="#" class="social-link">
+            <i class="bi bi-twitter"></i>
+          </a>
+          <a href="#" class="social-link">
+            <i class="bi bi-whatsapp"></i>
+          </a>
+        </div>
+      </div>
+
+      <!-- Quick Links 
+      <div class="footer-section">
+        <h4>Links Rápidos</h4>
+        <ul class="footer-links">
+          <li><a href="home" (click)="navigateTo('home')">Início</a></li>
+          <li><a href="catalogo" (click)="navigateTo('catalogo')">Catálogo</a></li>
+          <li><a href="favoritos" (click)="navigateTo('favoritos')">Favoritos</a></li>
+          <li><a href="pontos" (click)="navigateTo('pontos')">Meus Pontos</a></li>
+        </ul>
+      </div>
+-->
+      <!-- Support -->
+      <div class="footer-section">
+        <h4>Suporte</h4>
+        <ul class="footer-links">
+          <li><a href="#">Central de Ajuda</a></li>
+          <li><a href="#">Termos de Uso</a></li>
+          <li><a href="#">Política de Privacidade</a></li>
+          <li><a href="#">Contato</a></li>
+        </ul>
+      </div>
+
+      <!-- Contact Info -->
+      <div class="footer-section">
+        <h4>Contato</h4>
+        <div class="contact-info">
+          <div class="contact-item">
+            <i class="bi bi-geo-alt"></i>
+            <span>Belo Horizonte, MG</span>
+          </div>
+          <div class="contact-item">
+            <i class="bi bi-telephone"></i>
+            <span>(31) 9 9999-9999</span>
+          </div>
+          <div class="contact-item">
+            <i class="bi bi-envelope"></i>
+            <span>contatocafeconnect.com</span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Footer Bottom -->
+    <div class="footer-bottom">
+      <div class="footer-container">
+        <p>&copy; 2025 Café Connect. Todos os direitos reservados.</p>
+        <div class="footer-badges">
+          <span class="badge">
+            <i class="bi bi-shield-check"></i>
+            Pagamento Seguro
+          </span>
+          <span class="badge">
+            <i class="bi bi-award"></i>
+            Qualidade Garantida
+          </span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Mobile Bottom Navigation 
+  <div class="mobile-bottom-nav">
+    <nav class="bottom-nav">
+      <button class="nav-item active" (click)="navigateTo('home')">
+        <i class="bi bi-house-door"></i>
+        <span>Início</span>
+      </button>
+      
+      <button class="nav-item" (click)="navigateTo('catalogo')">
+        <i class="bi bi-shop-window"></i>
+        <span>Catálogo</span>
+      </button>
+      
+      <button class="nav-item" (click)="navigateTo('favoritos')">
+        <i class="bi bi-heart"></i>
+        <span>Favoritos</span>
+      </button>
+      
+      <button class="nav-item" (click)="navigateTo('pontos')">
+        <i class="bi bi-currency-dollar"></i>
+        <span>Pontos</span>
+      </button>
+      
+      <button class="nav-item" (click)="navigateTo('perfil')">
+        <i class="bi bi-person-circle"></i>
+        <span>Perfil</span>
+      </button>
+    </nav>
+  </div>-->
+</footer>

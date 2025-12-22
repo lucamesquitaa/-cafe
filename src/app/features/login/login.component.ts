@@ -34,6 +34,10 @@ export class LoginComponent extends ComponentBase implements AfterViewInit {
   }
 
   async onLoginSubmit(formGroup: FormGroup) {
+    if (formGroup.invalid) {
+      this.toastr.error("Por favor, preencha todos os campos obrigatórios.");
+      return;
+    }
 
     this.loginService.doLogin(formGroup.value).subscribe({
       next: (result) => {
@@ -46,5 +50,11 @@ export class LoginComponent extends ComponentBase implements AfterViewInit {
         this.router.navigate(['admin']);
       }
     });
+  }
+
+  onCnpjLogin() {
+    // Implementar lógica para login CNPJ
+    this.toastr.info("Funcionalidade de Login CNPJ será implementada em breve.");
+    // Exemplo: this.router.navigate(['/login-cnpj']);
   }
 }

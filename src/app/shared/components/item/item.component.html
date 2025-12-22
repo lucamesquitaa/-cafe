@@ -1,13 +1,42 @@
-<div class="cafeteria">
-  <div class="cafeteriaImg">
-    <img [src]="cafeteria.image" alt="{{cafeteria.name}}" />
+<div class="modern-cafeteria-card">
+  <div class="card-image-container">
+    <img [src]="cafeteria.image" [alt]="cafeteria.name" class="card-image" />
+    <div class="image-overlay"></div>
+    <button class="favorite-btn" (click)="toggleFavorite($event)">
+      <i class="bi bi-heart"></i>
+    </button>
   </div>
-  <div class="cafeteriaInfo">
-    <div class="cora1">
-      <p style="font-weight: bold; font-size: 1.05rem;">{{cafeteria.name}}</p>
-      <i *ngIf="true" class="bi bi-heart" style="font-size: 1.2rem;"></i>
-      <i *ngIf="false" class="bi bi-heart-fill" style="font-size: 1.2rem;"></i>
+  
+  <div class="card-content">
+    <div class="card-header">
+      <h3 class="cafeteria-name">{{cafeteria.name}}</h3>
+      <div class="rating">
+        <div class="stars">
+          <i class="bi bi-star-fill"></i>
+          <i class="bi bi-star-fill"></i>
+          <i class="bi bi-star-fill"></i>
+          <i class="bi bi-star-fill"></i>
+          <i class="bi bi-star"></i>
+        </div>
+        <span class="rating-text">(4.2)</span>
+      </div>
     </div>
-    <p>{{cafeteria.description}}</p>
+    
+    
+    
+    <div class="card-details">
+      <span class="cafeteria-description">{{cafeteria.description}}</span>
+      <div class="detail-item">
+        <i class="bi bi-geo-alt"></i>
+        <span>1.2 km</span>
+      </div>
+    </div>
+    
+    <div class="card-actions">
+      <button class="action-btn primary">
+        <i class="bi bi-arrow-right"></i>
+        Ver Cardápio
+      </button>
+    </div>
   </div>
 </div>
