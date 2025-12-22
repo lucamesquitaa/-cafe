@@ -1,20 +1,136 @@
 
-<div class="inicioContainer">
-  <h4>Bem-vindo à Cheirim Bão</h4>
-  <div class="divider1">
-    <p style="text-align: center;">Do expresso encorpado ao cappuccino cremoso, tudo é feito com aquele toque artesanal que desperta memórias e conquista corações.<i class="bi bi-cup-hot-fill"></i></p>
-    <img src="assets/ctest.png" alt="banner acfe" class="ban1"/>
-    <p style="text-align: center;">Visite nossa loja ! <i class="bi bi-geo-alt-fill"></i></p>
-    <div class="map-container">
-      <iframe
-        src="https://maps.google.com/maps?q=Rua%20Bahia%201876%20Belo%20Horizonte&output=embed"
-        width="300"
-        height="250"
-        style="border:0;"
-        allowfullscreen=""
-        loading="lazy"
-        referrerpolicy="no-referrer-when-downgrade"
-      ></iframe>
-      <p style="text-align: center;">Rua da Bahia 1876, Belo Horizonte - MG</p>
+<div class="modern-inicio">
+  <!-- Welcome Section -->
+  <section class="welcome-section">
+    <div class="welcome-header">
+      <div class="welcome-icon">
+        <i class="bi bi-cup-hot"></i>
+      </div>
+      <h2>Bem-vindo à Cheirim Bão</h2>
+      <div class="rating-badge">
+        <i class="bi bi-star-fill"></i>
+        <span>4.8</span>
+      </div>
     </div>
+    
+    <div class="description-card">
+      <p class="description-text">
+        Do expresso encorpado ao cappuccino cremoso, tudo é feito com aquele 
+        <span class="highlight">toque artesanal</span> que desperta memórias e conquista corações.
+      </p>
+      <div class="specialty-tags">
+        <span class="tag">Café Artesanal</span>
+        <span class="tag">Ambiente Acolhedor</span>
+        <span class="tag">Tradição</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- Image Gallery -->
+  <section class="gallery-section">
+    <h3>Conheça Nosso Ambiente</h3>
+    <div class="gallery-grid">
+      <div class="main-image">
+        <img src="assets/ctest.png" alt="Ambiente da Cafeteria" class="gallery-img main">
+        <div class="image-overlay">
+          <span class="overlay-text">Ambiente Principal</span>
+        </div>
+      </div>
+      <div class="secondary-images">
+        <div class="small-image">
+          <img src="assets/chHD.jpg" alt="Café Especial" class="gallery-img">
+          <div class="image-overlay">
+            <span class="overlay-text">Nossos Cafés</span>
+          </div>
+        </div>
+        <div class="small-image">
+          <img src="assets/coffs.png" alt="Área Externa" class="gallery-img">
+          <div class="image-overlay">
+            <span class="overlay-text">Área Externa</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Features Section -->
+  <section class="features-section">
+    <h3>O Que Oferecemos</h3>
+    <div class="features-grid">
+      <div class="feature-card">
+        <div class="feature-icon">
+          <i class="bi bi-cup-hot"></i>
+        </div>
+        <h4>Café Premium</h4>
+      </div>
+      
+      <div class="feature-card">
+        <div class="feature-icon">
+          <i class="bi bi-wifi"></i>
+        </div>
+        <h4>Wi-Fi Grátis</h4>
+      </div>
+      
+      <div class="feature-card">
+        <div class="feature-icon">
+          <i class="bi bi-clock"></i>
+        </div>
+        <h4>Horário Flexível</h4>
+      </div>
+      
+      <div class="feature-card">
+        <div class="feature-icon">
+          <i class="bi bi-heart"></i>
+        </div>
+        <h4>Atendimento</h4>
+      </div>
+    </div>
+  </section>
+
+  <!-- Location Section -->
+  <section class="location-section">
+    <div class="location-header">
+      <div class="location-icon">
+        <i class="bi bi-geo-alt"></i>
+      </div>
+      <div class="location-info">
+        <h3>Visite Nossa Loja</h3>
+        <p>Estamos te esperando no coração da cidade</p>
+      </div>
+    </div>
+    
+    <div class="location-card">
+      <div class="address-info">
+        <div class="address-item">
+          <i class="bi bi-geo-alt-fill"></i>
+          <span>Rua da Bahia, 1876 - Centro, Belo Horizonte - MG</span>
+        </div>
+        <div class="address-item">
+          <i class="bi bi-telephone"></i>
+          <span>(31) 3333-4444</span>
+        </div>
+        <div class="address-item">
+          <i class="bi bi-clock"></i>
+          <span>Seg-Dom: 06:00 - 22:00</span>
+        </div>
+      </div>
+      
+      <div class="map-container">
+        <iframe
+          src="https://maps.google.com/maps?q=Rua%20Bahia%201876%20Belo%20Horizonte&output=embed"
+          class="map-frame"
+          allowfullscreen=""
+          loading="lazy"
+          referrerpolicy="no-referrer-when-downgrade"
+        ></iframe>
+        <div class="map-overlay">
+          <button class="directions-btn">
+            <i class="bi bi-navigation"></i>
+            Como Chegar
+          </button>
+        </div>
+      </div>
+    </div>
+  </section>
+
 </div>

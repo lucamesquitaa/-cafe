@@ -1,28 +1,87 @@
 
-<nav class="navbar navbar-expand-lg navbar-light bg1">
-  <i *ngIf="title == 'Clube Cafeína'"  style="font-size: 1.3rem; margin-left: 5px; color: #424242;" class="bi bi-cup-hot"></i>
-  <i *ngIf="title != 'Clube Cafeína'" style="font-size: 1.2rem; margin-left: 5px; color: #424242;" class="bi bi-arrow-left" (click)="routerHome()"></i>
-  <a class="navbar-brand club1" href="#" style="color: #424242">{{title}}</a>
-  
-  <div ngbDropdown class="d-inline-block drop1">
-    <i *ngIf="title == 'Clube Cafeína'" class="bi bi-person-circle user1" id="dropdownForm1" ngbDropdownToggle style="font-size: 1.2rem; margin-right: 5px; color: #424242;"></i>
-    <div *ngIf="title != 'Clube Cafeína'" class="love1">
-      <i *ngIf="!isLoved" class="bi bi-heart" style="font-size: 1.2rem; margin-right: 5px; color: #424242;" (click)="toggleLove()"></i>
-      <i *ngIf="isLoved" class="bi bi-heart-fill" style="font-size: 1.2rem; margin-right: 5px; color: #424242;" (click)="toggleLove()"></i>
+<header class="modern-header">
+  <nav class="navbar">
+    <div class="navbar-container">
+      <!-- Logo e Brand -->
+      <div class="brand-section">
+        <div class="logo-container">
+          <img src="assets/gra-logo.png" class="logo" alt="Logo Café">
+          <div class="logo-animation"></div>
+        </div>
+        <div class="brand-info">
+          <h1 class="brand-title">{{title}}</h1>
+          <span class="brand-subtitle" *ngIf="title == 'Clube do Cafeína'">Conectando você aos melhores estabelecimentos</span>
+        </div>
+      </div>
+
+ 
+      <!-- Actions Section -->
+      <div class="header-actions">
+
+        <!-- User Menu -->
+        <div ngbDropdown class="user-menu-dropdown">
+          <button class="user-menu-btn" id="dropdownForm1" ngbDropdownToggle>
+            <div class="user-avatar">
+              <img src="assets/eu-foto-whats.jpg" alt="Avatar" class="avatar-img">
+              <div class="online-indicator"></div>
+            </div>
+            <div class="user-info">
+              <span class="user-name">Luca</span>
+              <span class="user-points">1.250 pts</span>
+            </div>
+          </button>
+          
+          <div ngbDropdownMenu aria-labelledby="dropdownForm1" class="modern-dropdown">
+            <div class="dropdown-header">
+              <div class="user-profile">
+                <img src="assets/eu-foto-whats.jpg" alt="Avatar" class="profile-img">
+                <div class="profile-info">
+                  <h4>Luca Mesquita</h4>
+                  <p>lucamesquitaa&#64;gmail.com</p>
+                </div>
+              </div>
+            </div>
+            
+            <div class="dropdown-section">
+              <button type="button" ngbDropdownItem class="dropdown-item">
+                <i class="bi bi-person"></i>
+                <span>Meu Perfil</span>
+              </button>
+              <button type="button" ngbDropdownItem class="dropdown-item">
+                <i class="bi bi-star"></i>
+                <span>Meus Favoritos</span>
+              </button>
+              <button type="button" ngbDropdownItem class="dropdown-item">
+                <i class="bi bi-currency-dollar"></i>
+                <span>Meus Pontos</span>
+                <span class="points-badge">1.250</span>
+              </button>
+              <button type="button" ngbDropdownItem class="dropdown-item">
+                <i class="bi bi-clock-history"></i>
+                <span>Histórico</span>
+              </button>
+            </div>
+            
+            <div class="dropdown-section">
+              <button type="button" ngbDropdownItem class="dropdown-item">
+                <i class="bi bi-gear"></i>
+                <span>Configurações</span>
+              </button>
+              <button type="button" ngbDropdownItem class="dropdown-item">
+                <i class="bi bi-question-circle"></i>
+                <span>Ajuda</span>
+              </button>
+            </div>
+            
+            <div class="dropdown-footer">
+              <button type="button" ngbDropdownItem class="dropdown-item logout-btn">
+                <i class="bi bi-box-arrow-right"></i>
+                <span>Sair</span>
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
     </div>
-    
-    <div ngbDropdownMenu aria-labelledby="dropdownForm1" class="drop2">
-      <div class="mb-3" *ngIf="false">
-          <button type="button" ngbDropdownItem>Login</button>
-        </div>
-        <div class="mb-3" *ngIf="true">
-          <button type="button" ngbDropdownItem>Olá, Luca!</button>
-        </div>
-      <div class="mb-3" *ngIf="true">
-          <button type="button" ngbDropdownItem>Pontos</button>
-        </div>
-      <div class="dropdown-divider"></div>
-      <button type="button" ngbDropdownItem>Sair</button>
-    </div>
-  </div>
-</nav>
+  </nav>
+</header>

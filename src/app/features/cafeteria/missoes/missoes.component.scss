@@ -1,26 +1,248 @@
-.missaocontainer1{
-    width: 100%;
-    max-width: 600px;
-    margin-top: 10px;
+.missaocontainer1 {
+    padding: 16px;
+    max-width: 100%;
+    margin: 0 auto;
 }
-.missoes{
+
+.header-section {
+    text-align: center;
+    margin-bottom: 24px;
     
+    h4 {
+        font-size: 1.5rem;
+        font-weight: 600;
+        color: #2c3e50;
+        margin-bottom: 8px;
+    }
 }
-.missao1{
-    background-color: #E6E6E6;
-    border-radius: 10px;
-    padding: 10px;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    margin-bottom: 20px;
-}
-.missao1 p{
+
+.subtitulo {
+    font-size: 0.875rem;
+    color: #6c757d;
     margin: 0;
+    padding: 0 16px;
 }
-.missao2{
-   background-color: var(--cor-azul-claro);
+
+.missoes {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
 }
-.bi{
-    margin: 5px;
+
+.missao-item {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    background: #fff;
+    border-radius: 12px;
+    padding: 16px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+    border: 2px solid #e9ecef;
+    transition: all 0.3s ease;
+    min-height: 72px;
+    
+    &:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+    }
+    
+    &.completed {
+        background: #f8fff8;
+        border-color: #28a745;
+        
+        .missao-icon {
+            background: #d4edda;
+            
+            i {
+                color: #28a745;
+            }
+        }
+        
+        .missao-categoria {
+            background: #d4edda;
+            color: #155724;
+        }
+        
+        .pontos {
+            background: #d4edda;
+            color: #28a745;
+        }
+        
+        .status-icon {
+            color: #28a745;
+        }
+    }
+}
+
+.missao-content {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    flex: 1;
+}
+
+.missao-icon {
+    width: 40px;
+    height: 40px;
+    border-radius: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: #f8f9fa;
+    flex-shrink: 0;
+    
+    i {
+        font-size: 1.25rem;
+        color: #6c757d;
+    }
+}
+
+.missao-info {
+    flex: 1;
+    min-width: 0;
+}
+
+.missao-descricao {
+    font-size: 1rem;
+    font-weight: 500;
+    color: #2c3e50;
+    margin: 0 0 4px 0;
+    line-height: 1.4;
+}
+
+.missao-categoria {
+    font-size: 0.75rem;
+    color: #6c757d;
+    background: #f8f9fa;
+    padding: 2px 8px;
+    border-radius: 12px;
+    display: inline-block;
+}
+
+.missao-reward {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    flex-shrink: 0;
+}
+
+.pontos {
+    font-size: 0.875rem;
+    font-weight: 600;
+    color: #6f42c1;
+    background: #f8f6ff;
+    padding: 4px 8px;
+    border-radius: 8px;
+    min-width: 45px;
+    text-align: center;
+}
+
+.status-icon {
+    font-size: 1.25rem;
+    color: #dee2e6;
+    transition: color 0.3s ease;
+    
+    &.completed {
+        color: #28a745;
+    }
+}
+
+// Responsividade para dispositivos móveis
+@media (max-width: 768px) {
+    .missaocontainer1 {
+        padding: 12px;
+    }
+    
+    .header-section {
+        margin-bottom: 20px;
+        
+        h4 {
+            font-size: 1.375rem;
+        }
+    }
+    
+    .subtitulo {
+        padding: 0 8px;
+        font-size: 0.8125rem;
+    }
+    
+    .missao-item {
+        padding: 14px;
+        min-height: 68px;
+    }
+    
+    .missao-content {
+        gap: 10px;
+    }
+    
+    .missao-icon {
+        width: 36px;
+        height: 36px;
+        
+        i {
+            font-size: 1.125rem;
+        }
+    }
+    
+    .missao-descricao {
+        font-size: 0.9375rem;
+    }
+    
+    .missao-categoria {
+        font-size: 0.6875rem;
+        padding: 1px 6px;
+    }
+    
+    .pontos {
+        font-size: 0.8125rem;
+        padding: 3px 6px;
+        min-width: 40px;
+    }
+    
+    .status-icon {
+        font-size: 1.125rem;
+    }
+}
+
+@media (max-width: 480px) {
+    .missaocontainer1 {
+        padding: 10px;
+    }
+    
+    .missao-item {
+        padding: 12px;
+        min-height: 64px;
+    }
+    
+    .missao-content {
+        gap: 8px;
+    }
+    
+    .missao-icon {
+        width: 32px;
+        height: 32px;
+        
+        i {
+            font-size: 1rem;
+        }
+    }
+    
+    .missao-descricao {
+        font-size: 0.875rem;
+        line-height: 1.3;
+    }
+    
+    .missao-reward {
+        gap: 6px;
+    }
+    
+    .pontos {
+        font-size: 0.75rem;
+        padding: 2px 5px;
+        min-width: 35px;
+    }
+    
+    .status-icon {
+        font-size: 1rem;
+    }
 }
