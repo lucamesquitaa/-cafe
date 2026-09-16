@@ -1,4 +1,4 @@
-import { Component, Injector, OnDestroy } from '@angular/core';
+import { ChangeDetectorRef, Component, Injector, OnDestroy } from '@angular/core';
 import { merge, Subscription } from 'rxjs';
 import { map } from 'rxjs/operators';
 import { ComponentBase } from 'src/app/shared/components/component.base';
@@ -24,7 +24,8 @@ export class CatalogoComponent extends ComponentBase implements OnDestroy {
   constructor(
     public override injector: Injector,
     private cafeteriaService: CafeteriaService,
-    private photosService: PhotosService
+    private photosService: PhotosService,
+    private cdr: ChangeDetectorRef
   ) {
     super(injector);
   }
@@ -62,10 +63,12 @@ export class CatalogoComponent extends ComponentBase implements OnDestroy {
         this.temMais = lista.length === this.tamanhoPagina;
 
         this.preencherCapas(novos.filter(card => card.image === FOTO_PLACEHOLDER));
+        this.cdr.markForCheck();
       },
       error: (erro) => {
         this.hideLoading();
         this.toastr.error(erro.error?.mensagem ?? 'Não foi possível carregar as cafeterias.');
+        this.cdr.markForCheck();
       }
     });
   }
@@ -87,6 +90,7 @@ export class CatalogoComponent extends ComponentBase implements OnDestroy {
       merge(...buscas).subscribe(({ card, url }) => {
         if (url) {
           card.image = url;
+          this.cdr.markForCheck();
         }
       })
     );
