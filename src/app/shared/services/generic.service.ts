@@ -58,7 +58,7 @@ export abstract class ServiceGeneric {
 	}
 
 	public getBaseUrl(): string {
-        return "https://localhost:4200";
+        return "http://localhost:8080";
 	}
 
     getFullUrl(): any {

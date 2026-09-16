@@ -1,37 +1,87 @@
-import { Component, OnInit, HostListener, ElementRef, Injector } from '@angular/core';
+import { Component, OnInit, OnDestroy, ElementRef, Injector } from '@angular/core';
+import { forkJoin, of, Subscription } from 'rxjs';
+import { catchError, filter, finalize, map, switchMap } from 'rxjs/operators';
 import { ComponentBase } from 'src/app/shared/components/component.base';
+import { CafeteriaService } from 'src/app/shared/services/cafeteria.service';
+import { PhotosService } from 'src/app/shared/services/photos.service';
+import { GetCafeteriaById } from 'src/app/shared/models/cafeteria.model';
+import { GetAllPhotos } from 'src/app/shared/models/photo.model';
+import { CafeteriaDetalhe, CafeteriaStateService } from './cafeteria-state.service';
 
 @Component({
   selector: 'app-cafeteria',
   standalone: false,
   templateUrl: './cafeteria.component.html',
-  styleUrl: './cafeteria.component.scss'
+  styleUrl: './cafeteria.component.scss',
+  providers: [CafeteriaStateService]
 })
-export class CafeteriaComponent extends ComponentBase implements OnInit{
+export class CafeteriaComponent extends ComponentBase implements OnInit, OnDestroy {
   itemSelected: any;
   isLoved: boolean = false;
   isOpen: boolean = true;
-    cafeterias = [
-      { id: "123", name: 'Cheirim Bão', description: 'Centro', image: "assets/cheirin-bao.jpg" },
-      { id: "124", name: 'Café da Praça', description: 'Jardim', image: "https://images.squarespace-cdn.com/content/v1/606c6f7eb1c93132f0bed4e6/1645538391593-ZT1K6ZJYJ2UNVNX0TTH0/bonomi.jpeg" },
-      { id: "125", name: 'Café Gourmet', description: 'Zona Sul', image: "https://quantocustaviajar.com/blog/wp-content/uploads/2023/01/foto-casa-granu.png" },
-      { id: "126", name: 'Café Artesanal', description: 'Zona Norte', image: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTjgED9CVV-iuo8z-3RjfuWDO0b9MbvMNoPPg&s" }
-    ];
+
+  private rotaSubscription?: Subscription;
 
     constructor(
       public override injector: Injector,
-      private elementRef: ElementRef
+      private elementRef: ElementRef,
+      private cafeteriaService: CafeteriaService,
+      private photosService: PhotosService,
+      private state: CafeteriaStateService
     ) {
       super(injector);
     }
 
     override ngOnInit(): void {
       window.scrollTo(0, 0);
-      let id = this.activatedRoute.snapshot.paramMap.get('id');
-      this.itemSelected = this.cafeterias.find(cafeteria => cafeteria.id === id);
-      if (this.itemSelected) {
-        this.context.pageTitle = this.itemSelected.name;
-      }
+      this.rotaSubscription = this.activatedRoute.paramMap.pipe(
+        map(params => params.get('id')),
+        filter((id): id is string => !!id),
+        switchMap(id => this.buscarDetalhe(id))
+      ).subscribe(detalhe => {
+        if (!detalhe) {
+          return;
+        }
+        this.state.definir(detalhe.cafeteria, detalhe.fotos);
+        this.itemSelected = {
+          id: detalhe.cafeteria.id,
+          name: detalhe.cafeteria.nome,
+          image: this.imagemHero(detalhe.cafeteria, detalhe.fotos)
+        };
+        this.context.pageTitle = detalhe.cafeteria.nome;
+      });
+    }
+
+    override ngOnDestroy(): void {
+      this.rotaSubscription?.unsubscribe();
+    }
+
+    private buscarDetalhe(id: string) {
+      this.showLoading();
+      return forkJoin({
+        cafeteria: this.cafeteriaService.getById(id),
+        fotos: this.photosService.getByCafeteria(id).pipe(catchError(() => of(null)))
+      }).pipe(
+        finalize(() => this.hideLoading()),
+        map(({ cafeteria, fotos }): CafeteriaDetalhe | null => {
+          if (!cafeteria.sucesso || !cafeteria.data) {
+            this.toastr.error(cafeteria.mensagem ?? 'Cafeteria não encontrada.');
+            return null;
+          }
+          return { cafeteria: cafeteria.data, fotos: fotos?.data ?? [] };
+        }),
+        catchError(erro => {
+          this.toastr.error(erro.error?.mensagem ?? 'Não foi possível carregar a cafeteria.');
+          return of(null);
+        })
+      );
+    }
+
+    private imagemHero(cafeteria: GetCafeteriaById, fotos: GetAllPhotos[]): string {
+      return cafeteria.fotoPrincipal
+        || fotos.find(foto => foto.stared)?.url
+        || fotos[0]?.url
+        || 'assets/cheirin-bao.jpg';
     }
 
     toggleLove() {
