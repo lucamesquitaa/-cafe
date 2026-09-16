@@ -1,9 +1,9 @@
 <div class="modern-cafeteria-card">
   <div class="card-image-container">
-    <img [src]="cafeteria.image" [alt]="cafeteria.name" class="card-image" />
+    <img [src]="cafeteria.image" [alt]="cafeteria.name" class="card-image" loading="lazy" (error)="usarPlaceholder()" />
     <div class="image-overlay"></div>
-    <button class="favorite-btn" (click)="toggleFavorite($event)">
-      <i class="bi bi-heart"></i>
+    <button class="favorite-btn" type="button" [class.active]="cafeteria.fav" (click)="toggleFavorite($event)">
+      <i class="bi" [class.bi-heart]="!cafeteria.fav" [class.bi-heart-fill]="cafeteria.fav"></i>
     </button>
   </div>
   

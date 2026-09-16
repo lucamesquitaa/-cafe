@@ -2,7 +2,7 @@
   <!-- Hero Section with Parallax Effect -->
   <section class="hero-section">
     <div class="hero-image-container">
-      <img [src]="itemSelected?.image || 'assets/chHD.jpg'" [alt]="itemSelected?.name" class="hero-image">
+      <img [src]="itemSelected.image" [alt]="itemSelected.name" class="hero-image" (error)="usarPlaceholderHero()">
       <div class="hero-overlay"></div>
       <div class="image-gradient"></div>
     </div>
@@ -64,7 +64,7 @@
       <div class="breadcrumb">
         <span class="breadcrumb-item">Cafeterias</span>
         <i class="bi bi-chevron-right"></i>
-        <span class="breadcrumb-item active">{{itemSelected?.name}}</span>
+        <span class="breadcrumb-item active">{{itemSelected.name}}</span>
       </div>
       
       <!-- Router Outlet with Animation -->
