@@ -1,4 +1,4 @@
-import { Component, OnInit, OnDestroy, Injector } from '@angular/core';
+import { ChangeDetectorRef, Component, OnInit, OnDestroy, Injector } from '@angular/core';
 import { forkJoin, of, Subscription } from 'rxjs';
 import { catchError, filter, finalize, map, switchMap } from 'rxjs/operators';
 import { ComponentBase } from 'src/app/shared/components/component.base';
@@ -32,7 +32,8 @@ export class CafeteriaComponent extends ComponentBase implements OnInit, OnDestr
       public override injector: Injector,
       private cafeteriaService: CafeteriaService,
       private photosService: PhotosService,
-      private state: CafeteriaStateService
+      private state: CafeteriaStateService,
+      private cdr: ChangeDetectorRef
     ) {
       super(injector);
     }
@@ -54,6 +55,7 @@ export class CafeteriaComponent extends ComponentBase implements OnInit, OnDestr
           image: this.imagemHero(detalhe.cafeteria, detalhe.fotos)
         };
         this.context.pageTitle = detalhe.cafeteria.nome;
+        this.cdr.markForCheck();
       });
     }
 
