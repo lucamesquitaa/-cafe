@@ -1,4 +1,4 @@
-import { HttpClient, HttpParams } from '@angular/common/http';
+import { HttpParams } from '@angular/common/http';
 import { Injectable, Injector } from '@angular/core';
 import { Observable } from 'rxjs';
 import { ServiceGeneric } from './generic.service';
@@ -9,7 +9,7 @@ import { GetAllCafeterias, GetCafeteriaById } from '../models/cafeteria.model';
   providedIn: 'root'
 })
 export class CafeteriaService extends ServiceGeneric {
-  override urlServiceREST: string = "https://localhost:8080/api/Cafeterias";
+  override urlServiceREST: string = "/api/Cafeterias";
 
   constructor(public override injector: Injector) {
     super(injector);
@@ -20,10 +20,10 @@ export class CafeteriaService extends ServiceGeneric {
       .set('page', page)
       .set('pageSize', pageSize);
 
-    return this.http.get<Retorno<GetAllCafeterias[]>>(this.urlServiceREST, { params });
+    return this.http.get<Retorno<GetAllCafeterias[]>>(this.getFullUrl(), { params });
   }
 
   getById(id: string): Observable<Retorno<GetCafeteriaById>> {
-    return this.http.get<Retorno<GetCafeteriaById>>(`${this.urlServiceREST}/${id}`);
+    return this.http.get<Retorno<GetCafeteriaById>>(`${this.getFullUrl()}/${id}`);
   }
 }

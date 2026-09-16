@@ -1,53 +1,39 @@
 
-<div class="modern-inicio">
+<div class="modern-inicio" *ngIf="vm$ | async as vm">
   <!-- Welcome Section -->
   <section class="welcome-section">
     <div class="welcome-header">
       <div class="welcome-icon">
         <i class="bi bi-cup-hot"></i>
       </div>
-      <h2>Bem-vindo à Cheirim Bão</h2>
+      <h2>Bem-vindo à {{ vm.nome }}</h2>
       <div class="rating-badge">
         <i class="bi bi-star-fill"></i>
         <span>4.8</span>
       </div>
     </div>
-    
-    <div class="description-card">
-      <p class="description-text">
-        Do expresso encorpado ao cappuccino cremoso, tudo é feito com aquele 
-        <span class="highlight">toque artesanal</span> que desperta memórias e conquista corações.
-      </p>
-      <div class="specialty-tags">
-        <span class="tag">Café Artesanal</span>
-        <span class="tag">Ambiente Acolhedor</span>
-        <span class="tag">Tradição</span>
+
+    <div class="description-card" *ngIf="vm.descricao || vm.diferencial">
+      <p class="description-text" *ngIf="vm.descricao">{{ vm.descricao }}</p>
+      <div class="specialty-tags" *ngIf="vm.diferencial">
+        <span class="tag">{{ vm.diferencial }}</span>
       </div>
     </div>
   </section>
 
   <!-- Image Gallery -->
-  <section class="gallery-section">
+  <section class="gallery-section" *ngIf="vm.fotoPrincipal">
     <h3>Conheça Nosso Ambiente</h3>
-    <div class="gallery-grid">
+    <div class="gallery-grid" [class.single]="!vm.fotosSecundarias.length">
       <div class="main-image">
-        <img src="assets/ctest.png" alt="Ambiente da Cafeteria" class="gallery-img main">
+        <img [src]="vm.fotoPrincipal.url" [alt]="vm.fotoPrincipal.alt" class="gallery-img main">
         <div class="image-overlay">
           <span class="overlay-text">Ambiente Principal</span>
         </div>
       </div>
-      <div class="secondary-images">
-        <div class="small-image">
-          <img src="assets/chHD.jpg" alt="Café Especial" class="gallery-img">
-          <div class="image-overlay">
-            <span class="overlay-text">Nossos Cafés</span>
-          </div>
-        </div>
-        <div class="small-image">
-          <img src="assets/coffs.png" alt="Área Externa" class="gallery-img">
-          <div class="image-overlay">
-            <span class="overlay-text">Área Externa</span>
-          </div>
+      <div class="secondary-images" *ngIf="vm.fotosSecundarias.length">
+        <div class="small-image" *ngFor="let foto of vm.fotosSecundarias">
+          <img [src]="foto.url" [alt]="foto.alt" class="gallery-img">
         </div>
       </div>
     </div>
@@ -63,21 +49,21 @@
         </div>
         <h4>Café Premium</h4>
       </div>
-      
+
       <div class="feature-card">
         <div class="feature-icon">
           <i class="bi bi-wifi"></i>
         </div>
         <h4>Wi-Fi Grátis</h4>
       </div>
-      
+
       <div class="feature-card">
         <div class="feature-icon">
           <i class="bi bi-clock"></i>
         </div>
         <h4>Horário Flexível</h4>
       </div>
-      
+
       <div class="feature-card">
         <div class="feature-icon">
           <i class="bi bi-heart"></i>
@@ -98,12 +84,12 @@
         <p>Estamos te esperando no coração da cidade</p>
       </div>
     </div>
-    
+
     <div class="location-card">
       <div class="address-info">
         <div class="address-item">
           <i class="bi bi-geo-alt-fill"></i>
-          <span>Rua da Bahia, 1876 - Centro, Belo Horizonte - MG</span>
+          <span>{{ vm.enderecoCompleto }}</span>
         </div>
         <div class="address-item">
           <i class="bi bi-telephone"></i>
@@ -114,10 +100,10 @@
           <span>Seg-Dom: 06:00 - 22:00</span>
         </div>
       </div>
-      
+
       <div class="map-container">
         <iframe
-          src="https://maps.google.com/maps?q=Rua%20Bahia%201876%20Belo%20Horizonte&output=embed"
+          [src]="vm.mapaUrl"
           class="map-frame"
           allowfullscreen=""
           loading="lazy"

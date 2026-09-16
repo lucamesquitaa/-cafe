@@ -10,6 +10,10 @@ import { CafeteriaService } from 'src/app/shared/services/cafeteria.service';
 })
 export class CatalogoComponent extends ComponentBase{
   cafeterias: any[] = [];
+  temMais = false;
+
+  private pagina = 1;
+  private readonly tamanhoPagina = 20;
 
   constructor(
     public override injector: Injector,
@@ -24,33 +28,40 @@ export class CatalogoComponent extends ComponentBase{
     this.carregarCafeterias();
   }
 
-  carregarCafeterias(): void {
+  carregarMais(): void {
+    this.pagina++;
+    this.carregarCafeterias();
+  }
+
+  private carregarCafeterias(): void {
     this.showLoading();
-    this.cafeteriaService.getAll().subscribe({
+    this.cafeteriaService.getAll(this.pagina, this.tamanhoPagina).subscribe({
       next: (retorno) => {
         this.hideLoading();
-        if (!retorno.sucesso) {
-          this.toastr.error(retorno.mensagem);
-          return;
-        }
-        this.cafeterias = (retorno.data ?? []).map(cafeteria => ({
-          id: cafeteria.id,
-          fav: false,
-          name: cafeteria.nome,
-          description: cafeteria.endereco,
-          image: cafeteria.fotoPrincipal || 'assets/chHD.jpg'
-        }));
+        const lista = retorno.data ?? [];
+        this.cafeterias = [
+          ...this.cafeterias,
+          ...lista.map(cafeteria => ({
+            id: cafeteria.id,
+            fav: false,
+            name: cafeteria.nome,
+            description: `${cafeteria.endereco}, ${cafeteria.numero}`,
+            image: cafeteria.fotoPrincipal || 'assets/chHD.jpg'
+          }))
+        ];
+        // A API não devolve o total: só há próxima página se esta veio cheia
+        this.temMais = lista.length === this.tamanhoPagina;
       },
-      error: () => {
+      error: (erro) => {
         this.hideLoading();
-        this.toastr.error('Não foi possível carregar as cafeterias.');
+        this.toastr.error(erro.error?.mensagem ?? 'Não foi possível carregar as cafeterias.');
       }
     });
   }
 
   onCafeteriaClick(cafeteria: any) {
     this.context.pageTitle = cafeteria.name;
-    this.router.navigate(['/cafeteria', cafeteria.id]); 
-    
+    this.router.navigate(['/cafeteria', cafeteria.id]);
+
   }
 }
