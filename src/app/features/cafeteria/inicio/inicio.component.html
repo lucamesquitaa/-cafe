@@ -21,23 +21,55 @@
     </div>
   </section>
 
-  <!-- Image Gallery -->
-  <section class="gallery-section" *ngIf="vm.fotoPrincipal">
+  <!-- Galeria de fotos (API de Photos): capa em destaque + miniaturas, todas abrem o lightbox -->
+  <section class="gallery-section" *ngIf="vm.fotoPrincipal as principal">
     <h3>Conheça Nosso Ambiente</h3>
     <div class="gallery-grid" [class.single]="!vm.fotosSecundarias.length">
-      <div class="main-image">
-        <img [src]="vm.fotoPrincipal.url" [alt]="vm.fotoPrincipal.alt" class="gallery-img main">
+      <button type="button" class="main-image"
+              [attr.aria-label]="'Ampliar ' + principal.alt"
+              (click)="abrirGaleria(galeriaModal, principal)">
+        <img [src]="principal.url" [alt]="principal.alt" class="gallery-img main" (error)="usarPlaceholder(principal)">
         <div class="image-overlay">
-          <span class="overlay-text">Ambiente Principal</span>
+          <span class="overlay-text"><i class="bi bi-arrows-fullscreen"></i> Ambiente Principal</span>
         </div>
-      </div>
+      </button>
+
       <div class="secondary-images" *ngIf="vm.fotosSecundarias.length">
-        <div class="small-image" *ngFor="let foto of vm.fotosSecundarias">
-          <img [src]="foto.url" [alt]="foto.alt" class="gallery-img">
-        </div>
+        <button type="button" class="small-image"
+                *ngFor="let foto of vm.fotosSecundarias; let ultima = last"
+                [attr.aria-label]="'Ampliar ' + foto.alt"
+                (click)="abrirGaleria(galeriaModal, foto)">
+          <img [src]="foto.url" [alt]="foto.alt" class="gallery-img" loading="lazy" (error)="usarPlaceholder(foto)">
+          <div class="image-overlay" [class.more]="ultima && vm.fotosOcultas > 0">
+            <span class="overlay-text" *ngIf="ultima && vm.fotosOcultas > 0; else ampliar">
+              +{{ vm.fotosOcultas }} {{ vm.fotosOcultas === 1 ? 'foto' : 'fotos' }}
+            </span>
+            <ng-template #ampliar>
+              <span class="overlay-text"><i class="bi bi-arrows-fullscreen"></i></span>
+            </ng-template>
+          </div>
+        </button>
       </div>
     </div>
   </section>
+
+  <!-- Lightbox: carrossel com todas as fotos, aberto na foto clicada -->
+  <ng-template #galeriaModal let-modal>
+    <div class="galeria-lightbox">
+      <button type="button" class="fechar-btn" aria-label="Fechar" (click)="modal.dismiss()">
+        <i class="bi bi-x-lg"></i>
+      </button>
+      <ngb-carousel ngbAutofocus [activeId]="fotoAtivaId" [interval]="0" [wrap]="true" [keyboard]="true"
+                    [showNavigationArrows]="vm.fotos.length > 1"
+                    [showNavigationIndicators]="vm.fotos.length > 1">
+        <ng-template ngbSlide *ngFor="let foto of vm.fotos" [id]="foto.id">
+          <div class="slide">
+            <img [src]="foto.url" [alt]="foto.alt" (error)="usarPlaceholder(foto)">
+          </div>
+        </ng-template>
+      </ngb-carousel>
+    </div>
+  </ng-template>
 
   <!-- Features Section -->
   <section class="features-section">

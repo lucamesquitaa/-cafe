@@ -1,12 +1,18 @@
-import { Component, OnInit, OnDestroy, ElementRef, Injector } from '@angular/core';
+import { Component, OnInit, OnDestroy, Injector } from '@angular/core';
 import { forkJoin, of, Subscription } from 'rxjs';
 import { catchError, filter, finalize, map, switchMap } from 'rxjs/operators';
 import { ComponentBase } from 'src/app/shared/components/component.base';
 import { CafeteriaService } from 'src/app/shared/services/cafeteria.service';
 import { PhotosService } from 'src/app/shared/services/photos.service';
 import { GetCafeteriaById } from 'src/app/shared/models/cafeteria.model';
-import { GetAllPhotos } from 'src/app/shared/models/photo.model';
+import { FOTO_PLACEHOLDER, GetAllPhotos, escolherCapa } from 'src/app/shared/models/photo.model';
 import { CafeteriaDetalhe, CafeteriaStateService } from './cafeteria-state.service';
+
+interface CafeteriaHero {
+  id: string;
+  name: string;
+  image: string;
+}
 
 @Component({
   selector: 'app-cafeteria',
@@ -16,7 +22,7 @@ import { CafeteriaDetalhe, CafeteriaStateService } from './cafeteria-state.servi
   providers: [CafeteriaStateService]
 })
 export class CafeteriaComponent extends ComponentBase implements OnInit, OnDestroy {
-  itemSelected: any;
+  itemSelected: CafeteriaHero | null = null;
   isLoved: boolean = false;
   isOpen: boolean = true;
 
@@ -24,7 +30,6 @@ export class CafeteriaComponent extends ComponentBase implements OnInit, OnDestr
 
     constructor(
       public override injector: Injector,
-      private elementRef: ElementRef,
       private cafeteriaService: CafeteriaService,
       private photosService: PhotosService,
       private state: CafeteriaStateService
@@ -60,6 +65,7 @@ export class CafeteriaComponent extends ComponentBase implements OnInit, OnDestr
       this.showLoading();
       return forkJoin({
         cafeteria: this.cafeteriaService.getById(id),
+        // A galeria é complementar: se a API de fotos falhar, a página ainda abre sem ela
         fotos: this.photosService.getByCafeteria(id).pipe(catchError(() => of(null)))
       }).pipe(
         finalize(() => this.hideLoading()),
@@ -77,11 +83,16 @@ export class CafeteriaComponent extends ComponentBase implements OnInit, OnDestr
       );
     }
 
+    /** Capa do hero: foto principal cadastrada, senão a foto em destaque da galeria, senão a primeira. */
     private imagemHero(cafeteria: GetCafeteriaById, fotos: GetAllPhotos[]): string {
-      return cafeteria.fotoPrincipal
-        || fotos.find(foto => foto.stared)?.url
-        || fotos[0]?.url
-        || 'assets/cheirin-bao.jpg';
+      return cafeteria.fotoPrincipal || escolherCapa(fotos)?.url || FOTO_PLACEHOLDER;
+    }
+
+    /** Se a URL do bucket falhar, mostra o placeholder em vez de um hero vazio. */
+    usarPlaceholderHero(): void {
+      if (this.itemSelected && this.itemSelected.image !== FOTO_PLACEHOLDER) {
+        this.itemSelected.image = FOTO_PLACEHOLDER;
+      }
     }
 
     toggleLove() {
