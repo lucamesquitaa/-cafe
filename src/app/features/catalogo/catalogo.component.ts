@@ -1,5 +1,6 @@
 import { Component, Injector } from '@angular/core';
 import { ComponentBase } from 'src/app/shared/components/component.base';
+import { CafeteriaService } from 'src/app/shared/services/cafeteria.service';
 
 @Component({
   selector: 'app-catalogo',
@@ -8,20 +9,43 @@ import { ComponentBase } from 'src/app/shared/components/component.base';
   styleUrl: './catalogo.component.scss'
 })
 export class CatalogoComponent extends ComponentBase{
-  cafeterias = [
-    { id: "123", fav: false, name: 'Cheirim Bão', description: 'Centro', image: "assets/chHD.jpg" },
-    { id: "124", fav: false, name: 'Café da Praça', description: 'Jardim', image: "https://images.squarespace-cdn.com/content/v1/606c6f7eb1c93132f0bed4e6/1645538391593-ZT1K6ZJYJ2UNVNX0TTH0/bonomi.jpeg" },
-    { id: "125", fav: true, name: 'Café Gourmet', description: 'Zona Sul', image: "https://quantocustaviajar.com/blog/wp-content/uploads/2023/01/foto-casa-granu.png" },
-    { id: "126", fav: false, name: 'Café Artesanal', description: 'Zona Norte', image: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTjgED9CVV-iuo8z-3RjfuWDO0b9MbvMNoPPg&s" }
-  ];
+  cafeterias: any[] = [];
 
-  constructor(public override injector: Injector) {
+  constructor(
+    public override injector: Injector,
+    private cafeteriaService: CafeteriaService
+  ) {
     super(injector);
   }
 
   override ngOnInit(): void {
     window.scrollTo(0, 0);
     this.context.pageTitle = "Clube Cafeína";
+    this.carregarCafeterias();
+  }
+
+  carregarCafeterias(): void {
+    this.showLoading();
+    this.cafeteriaService.getAll().subscribe({
+      next: (retorno) => {
+        this.hideLoading();
+        if (!retorno.sucesso) {
+          this.toastr.error(retorno.mensagem);
+          return;
+        }
+        this.cafeterias = (retorno.data ?? []).map(cafeteria => ({
+          id: cafeteria.id,
+          fav: false,
+          name: cafeteria.nome,
+          description: cafeteria.endereco,
+          image: cafeteria.fotoPrincipal || 'assets/chHD.jpg'
+        }));
+      },
+      error: () => {
+        this.hideLoading();
+        this.toastr.error('Não foi possível carregar as cafeterias.');
+      }
+    });
   }
 
   onCafeteriaClick(cafeteria: any) {
