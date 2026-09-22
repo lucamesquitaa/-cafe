@@ -1,0 +1,106 @@
+<div class="logs-container">
+
+  <div class="logs-header">
+    <div class="logs-title">
+      <h2><i class="bi bi-terminal"></i> Logs em Tempo Real</h2>
+      <p>Eventos das filas RabbitMQ transmitidos via WebSocket (/ws/logs)</p>
+    </div>
+
+    <div class="connection-status" [ngClass]="'status-' + estadoConexao">
+      <span class="status-dot"></span>
+      <span>{{ estadoLabels[estadoConexao] }}</span>
+      <button type="button" class="btn-icon" title="Reconectar agora"
+              *ngIf="estadoConexao !== 'conectado'" (click)="reconectarManualmente()">
+        <i class="bi bi-arrow-clockwise"></i>
+      </button>
+    </div>
+  </div>
+
+  <div class="alerta-erro" *ngIf="mensagemErro">
+    <i class="bi bi-exclamation-triangle-fill"></i>
+    <span>{{ mensagemErro }}</span>
+  </div>
+
+  <div class="logs-toolbar">
+    <div class="filtro-tipos">
+      <button *ngFor="let tipo of tiposFiltro" type="button"
+              class="filtro-btn"
+              [ngClass]="tipo.valor !== 'todos' ? classeRoutingKey(tipo.valor) : ''"
+              [class.active]="filtroTipo === tipo.valor"
+              (click)="onFiltroChange(tipo.valor)">
+        {{ tipo.label }}
+      </button>
+    </div>
+
+    <div class="busca-wrapper">
+      <i class="bi bi-search"></i>
+      <input type="text" placeholder="Buscar no payload ou na fila..."
+             [(ngModel)]="textoBusca" (ngModelChange)="onBuscaChange()">
+      <button type="button" class="clear-btn" *ngIf="textoBusca" (click)="limparBusca()">
+        <i class="bi bi-x"></i>
+      </button>
+    </div>
+
+    <div class="acoes">
+      <button type="button" class="btn-acao" [class.active]="pausado" (click)="alternarPausa()">
+        <i class="bi" [ngClass]="pausado ? 'bi-play-fill' : 'bi-pause-fill'"></i>
+        {{ pausado ? 'Retomar' : 'Pausar' }}
+      </button>
+      <button type="button" class="btn-acao" (click)="limparBuffer()">
+        <i class="bi bi-trash3"></i>
+        Limpar
+      </button>
+    </div>
+  </div>
+
+  <div class="novos-banner" *ngIf="pausado && novosDesdePausa > 0" (click)="alternarPausa()">
+    <i class="bi bi-arrow-up-circle-fill"></i>
+    {{ novosDesdePausa }} {{ novosDesdePausa === 1 ? 'novo log' : 'novos logs' }} enquanto pausado — clique para retomar
+  </div>
+
+  <div class="logs-vazio" *ngIf="logsExibidos.length === 0">
+    <i class="bi bi-inbox"></i>
+    <p *ngIf="logs.length === 0">Aguardando logs...</p>
+    <p *ngIf="logs.length > 0">Nenhum log corresponde aos filtros atuais.</p>
+  </div>
+
+  <div class="logs-grid" *ngIf="logsExibidos.length > 0">
+    <div class="log-card" *ngFor="let log of logsExibidos; trackBy: trackByLogId"
+         [ngClass]="classeRoutingKey(log.routingKey)"
+         [class.expandido]="logSelecionadoId === log.id"
+         (click)="selecionarLog(log)">
+
+      <div class="log-card-foto">
+        <img [src]="log.fotoCafeteria || FOTO_PLACEHOLDER" [alt]="log.nomeCafeteria || log.fila"
+             (error)="onFotoErro(log)">
+        <span class="log-badge">{{ log.routingKey }}</span>
+      </div>
+
+      <div class="log-card-corpo">
+        <div class="log-card-topo">
+          <span class="log-card-nome" [title]="log.nomeCafeteria || log.fila">
+            {{ log.nomeCafeteria || log.fila }}
+          </span>
+          <span class="log-horario">{{ log.recebidoEmLocal | date:'HH:mm:ss' }}</span>
+        </div>
+
+        <p class="log-card-erro" *ngIf="log.erroMensagem">
+          <i class="bi bi-exclamation-triangle-fill"></i> {{ log.erroMensagem }}
+        </p>
+        <p class="log-card-resumo" *ngIf="!log.erroMensagem">{{ log.payloadTexto }}</p>
+
+        <button type="button" class="log-card-expandir">
+          {{ logSelecionadoId === log.id ? 'Ocultar payload' : 'Ver payload' }}
+          <i class="bi" [ngClass]="logSelecionadoId === log.id ? 'bi-chevron-up' : 'bi-chevron-down'"></i>
+        </button>
+      </div>
+
+      <pre class="log-payload" *ngIf="logSelecionadoId === log.id" (click)="$event.stopPropagation()">{{ formatarPayload(log) }}</pre>
+    </div>
+  </div>
+
+  <div class="logs-rodape">
+    <span>{{ logsExibidos.length }} / {{ logs.length }} logs no buffer (máx. {{ TAMANHO_MAXIMO_BUFFER }})</span>
+  </div>
+
+</div>
