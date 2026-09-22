@@ -19,5 +19,9 @@ export class HeaderComponent extends ComponentBase {
   routerHome() {
     this.router.navigate(['/home']);
   }
-    
+
+  irParaLogs() {
+    this.router.navigate(['/logs']);
+  }
+
 }

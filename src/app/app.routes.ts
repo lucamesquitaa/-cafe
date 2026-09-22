@@ -26,4 +26,9 @@ export const ROUTES: Routes = [
     loadChildren: () =>
       import('./features/login/login.module').then(m => m.LoginModule),
   },
+  {
+    path: 'logs',
+    loadChildren: () =>
+      import('./features/logs/logs.module').then(m => m.LogsModule),
+  },
 ];
